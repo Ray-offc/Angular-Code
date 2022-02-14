@@ -1,0 +1,69 @@
+<h3>payment Form</h3>
+<table>
+  <tr>
+    <td>
+      <input
+        type="radio"
+        (change)="handlePaymentTypeChange($event)"
+        value="creditCard"
+        name="paymentType"
+        checked
+      />
+      Credit Card
+      <input
+        type="radio"
+        (change)="handlePaymentTypeChange($event)"
+        value="debitcard"
+        name="paymentType"
+      />
+      Debit Card
+      <input
+        type="radio"
+        (change)="handlePaymentTypeChange($event)"
+        value="netbanking"
+        name="paymentType"
+      />
+      Netbanking
+
+      <br />
+      <!-- <label *ngIf="getPaymentType.errors['required']" class="error">
+          Select payment type.
+        </label> -->
+    </td>
+  </tr>
+</table>
+
+<form [formGroup]="paymentForm" (ngSubmit)="onFormSubmit()">
+  <table>
+    <ng-container>
+      <tr>
+        <td>
+          <label for="">Enter CardNumber/ID:</label>
+          <input type="number" formControlName="password" />
+        </td>
+      </tr>
+      <tr>
+        <td
+          *ngIf="paymentType === 'netbanking' || paymentType === 'creditCard'"
+        >
+          <label>
+            <!-- <label
+          *ngIf="paymentForm.get('password').errors.required"
+          class="error"
+        > -->
+            Enter Password:
+          </label>
+          <input type="password" formControlName="password" />
+        </td>
+      </tr>
+    </ng-container>
+    <tr>
+      <td>
+        <button type="submit">Pay</button>
+      </td>
+      <td>
+        <button type="reset">Reset</button>
+      </td>
+    </tr>
+  </table>
+</form>
